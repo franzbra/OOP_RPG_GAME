@@ -1,0 +1,20 @@
+{
+    "weapons": {
+        "Sword": "A sharp blade used by warriors.",
+        "Bow": "A ranged weapon used by hunters and thieves.",
+        "Wand": "A magical stick used by shamans."
+    },
+    "items": {
+        "Shield": "A protective item used to block attacks.",
+        "Potion": "A consumable item that restores health."
+    },
+    "titles": {
+        "Brave": "Awarded for acts of courage.",
+        "Sly": "Awarded for acts of cunning."
+    },
+    "responses": {
+        "default": "UNGALAUNGH!?",
+        "greet": "Hello, traveler! How can I assist you today?",
+        "farewell": "GRUNT!"
+    }
+}
