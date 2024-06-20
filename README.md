@@ -30,7 +30,7 @@ A role playing game where you have to build and feed a prehistoric tribe during 
 - [ ] Add to possibility to pray obtaining more chance to find meat, items ecc
 
 ### Time ###
-- [ ] Implement a way to simulate the passing of time
+- [ ] Implement a way to simulate the passing of time: every 10 rounds a day goes by
 - [ ] Give the player a mission to complete
 ### Tribe ### 
 - [x] Create a Tribe class
