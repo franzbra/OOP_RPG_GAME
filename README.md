@@ -10,6 +10,8 @@ A role playing game where you have to build and feed a prehistoric tribe during 
 - [x] add weapon mastery value. This should increase everytime we manage to hit a monster
 - [x] add crafting skills (this is valid both for building statues, draw paintings or constructing tools)
 - [ ] implement a dynamic to craft tools based on your tribe resources
+- [ ] put a limit to the number of hours character can train or gather resources or number of pf you gain by sleeping
+- [ ] actions consume pf
 
 
 ### Chatbot ### 
@@ -30,7 +32,7 @@ A role playing game where you have to build and feed a prehistoric tribe during 
 - [ ] Add to possibility to pray obtaining more chance to find meat, items ecc
 
 ### Time ###
-- [ ] Implement a way to simulate the passing of time: every 10 rounds a day goes by
+- [x] Implement a way to simulate the passing of time: every 10 rounds a day goes by
 - [ ] Give the player a mission to complete
 ### Tribe ### 
 - [x] Create a Tribe class
@@ -38,5 +40,5 @@ A role playing game where you have to build and feed a prehistoric tribe during 
 - [ ] Magical objects give extra chance to find meat, items ecc when praying
 - [x] Create an inventory for the tribe with meat, bones, wood, ...
 - [x] Fix monster in the tribe: their meat and bones are not available!
-- [ ] Each night the tribe has to eat. Those who don't eat take 20 pf damage.
+- [x] Each night the tribe has to eat. Those who don't eat die.
 - [ ] Implement the possibility to hunt and gather resources with all the members of the tribe. Different members should also be able to do different activities
