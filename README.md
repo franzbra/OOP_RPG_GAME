@@ -4,18 +4,18 @@ A role playing game where you have to build and feed a prehistoric tribe during 
 
 ## To do: ##
 ### Characters ###
-- [ ] add communication/intelligence stats to characters
-- [ ] add animal affinity
+- [x] add communication/intelligence stats to characters
+- [x] add animal affinity
 - [ ] add moral 
 - [ ] add weapon mastery value. This should increase everytime we manage to hit a monster
-- [ ] add crafting skills (this is valid both for building statues, draw paintings or constructing tools)
+- [x] add crafting skills (this is valid both for building statues, draw paintings or constructing tools)
 
 ### Chatbot ### 
 - [ ] If new characters are evil, they will steal items from the tribe, attack or curse them(depending on their class)
 - [ ] If the communication/intelligence of the bot is lower than yours, you could try to invite him to join your tribe. 
 
 ### Monsters ### 
-- [ ] Add dexterity
+- [x] Add dexterity
 - [ ] if a character has a value of animal affinity larger than some treshold, the monster can be tamed.
 - [ ] Add two kind of monsters: regular or legendary. Chances to find a legendary monster are 10%
 
