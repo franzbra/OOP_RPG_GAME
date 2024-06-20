@@ -6,6 +6,7 @@ Created on Sun Jun 16 15:51:10 2024
 """
 import random
 import json
+from tribe import *
 from characters import *
 
 # Components for generating names
@@ -29,7 +30,7 @@ def load_data():
     return data
 
 
-def chatbot(character, data):
+def chatbot(player, character, data):
     if not character:
         print("No character was generated. Exiting chatbot.")
         return
@@ -53,6 +54,9 @@ def chatbot(character, data):
             print(f"{character.name}: My defense stat is {character.defense}.")
         elif "pf" in user_input:
             print(f"{character.name}: My PF stat is {character.pf}.")
+        elif "communication" in user_input:
+                print(f"{character.name}: My communication stat is {character.communication}.")
+    
         elif "weapon" in user_input:
             weapon_name = str(character.weapon)
             print(f"{character.name}: I am equipped with a {type(weapon_name)}. {data['weapons'].get(weapon_name, '')}")
@@ -68,6 +72,13 @@ def chatbot(character, data):
                 print(f"{character.name}: I have no titles yet.")
         elif "magic" in user_input and isinstance(character, Shaman):
             print(f"{character.name}: I can cast {character.magic}.")
+        elif "join" in user_input:
+            if character.communication < player.communication:
+                answer = True
+                print('UNGALABUNGALA YES!')
+                return answer 
+            else: 
+                print('I don\'t want to follow a fool')
         else:
             print(data["responses"]["default"])
     

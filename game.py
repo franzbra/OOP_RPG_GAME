@@ -19,19 +19,22 @@ if __name__ == "__main__":
     class_name = input("What is your chosen class?\n1) Warrior\n2) Hunter\n3) Shaman\n")
     
     if class_name == '1':
-        character = Warrior(name)
+        player = Warrior(name)
     elif class_name == '2':
-        character = Hunter(name)
+        player = Hunter(name)
     elif class_name == '3':
-        character = Shaman(name)
+        player = Shaman(name)
     else:
         print("Invalid choice. Defaulting to Warrior.")
-        character = Warrior(name)
+        player = Warrior(name)
     
-    print(f"Character created:\n{character}")
-    #Initialize motion
+    print(f"Character created:\n{player}")
+    #Initialize classes
     command = Commands()
-    menu = Menu(character)
+    tribe_name = input('Choose a name for your tribe')
+    tribe = Tribe(tribe_name)
+    tribe.add_character(player)
+    menu = Menu(player, tribe)
     print("Welcome to the Adventure Game!")
     print(command.current_room.get_description())
     while True:
@@ -43,14 +46,19 @@ if __name__ == "__main__":
         if verb == "go":
             if len(text) > 1:
                 command.move(text[1])
-                chance = random.randint(1, 100)
+                chance = 75 #random.randint(1, 100)
                 if chance > 70 :
                     event = command.random_event()
                     if type(event) in character_classes :  
                         data = load_data()
-                        chatbot(event, data)
+                        join = chatbot(player, event, data)
+                        if join == True : 
+                         tribe.add_character(event)
+                         tribe.display_characters()
+                         tribe.update_cumulative_items()
+                         tribe.display_cumulative_items()
+
                     elif type(event) in monster_classes:
-                        while True:
                             menu.open_fight_menu(event)
                 else :
                     menu.open_camp_menu()

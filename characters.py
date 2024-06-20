@@ -7,7 +7,7 @@ Created on Sun Jun 16 23:17:10 2024
 from weapons import * 
 from spells import *
 from Prehistoric_functions import *
-
+import random
 
 
 class Character:
@@ -22,8 +22,8 @@ class Character:
         self.defense = defense
         self.pf = pf
         self.craft = 0
-        self.communication = 0
-        self.animal_affinity = 0
+        self.communication = random.randint(1, 10)
+        self.animal_affinity = 1000
         self.search = 0
 
     def __str__(self):

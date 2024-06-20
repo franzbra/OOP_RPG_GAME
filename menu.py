@@ -5,25 +5,48 @@ Created on Mon Jun 17 00:06:10 2024
 @author: Francesco Brandoli
 """
 import random
+from tribe import *
 
 class Menu:
-    def __init__(self, character):
+    def __init__(self, character,tribe):
         self.character = character
+        self.tribe = tribe
+        
+    def select_weapon(self):
+        if len(self.character.weapon) > 1:
+            print("Choose a weapon:")
+            for i, weapon in enumerate(self.character.weapon):
+                print(f"{i + 1}) {weapon.name} (Expertise: {weapon.expertise})")
+                weapon_choice = int(input()) - 1
+        else:
+            weapon_choice = 0
+             
+        selected_weapon = self.character.weapon[weapon_choice]
+        return selected_weapon
+
 
     def attack(self, monster):
         # Simulate an attack action
         print(f"{self.character.name} attacks {monster.__class__.__name__}!")
         
-        #Implement a dynamic to hit the target: if weapon.precision > self.monster.defense 
-        # and weapon.expertise +=1
-        # Calculate damage based on character's attack and monster's defense
-        damage = (self.character.attack)
-        monster.pf -= damage
+        #Dynamic to hit the target
+        selected_weapon = self.select_weapon()
+        if selected_weapon.precision > monster.dexterity:
+            selected_weapon.expertise += 1
+            selected_weapon.precision += 1
+            damage = (self.character.attack+selected_weapon.damage)
+            monster.pf -= damage
+            print(f"{monster.name} takes {damage} damage!")
+        else : print(f"{monster.name} avoids the attack!")   
 
         # Check if the monster is defeated
         if monster.pf <= 0:
             print(f"{monster.name} is defeated!")
             self.character.gain_experience(monster.experience)
+            for item, quantity in monster.item.items():
+               if item in ["meat", "bones"]:
+                   self.character.equip_item(item, quantity)
+                   print(f"{self.character.name} obtains {quantity} {item} from {monster.name}.")                
             return True
         else:
             print(f"{monster.name} has {monster.pf} PF remaining.")
@@ -41,12 +64,13 @@ class Menu:
             print("Flee unsuccessful. Prepare for the next attack!")
             return False
 
-    def tame(self):
+    def tame(self, monster):
         #character try to tame the Monster
-        print(f"{self.character.name} attempts to tame the {self.monster}")
-        if self.character.animal_affinity > self.monster.tamability:
-            print(f"{self.monster} will now follow you!")
-            #Add method to add monster to your tribe
+        print(f"{self.character.name} attempts to tame the {monster.name}")
+        if self.character.animal_affinity >= monster.tamability:
+            print(f"{monster.name} will now follow you!")
+            self.tribe.add_character(monster)
+            return True
         else : 
             print(f'{self.character.name}failed to tame the beast!')
 
@@ -66,15 +90,7 @@ class Menu:
         #simulate weapon or crafting training
         choice= int(input("What do you want to train?\n1)Weapon \n2)Crafting"))
         if choice == 1:
-             if len(self.character.weapon) > 1:
-                 print("Choose a weapon to train:")
-                 for i, weapon in enumerate(self.character.weapon):
-                     print(f"{i + 1}) {weapon.name} (Expertise: {weapon.expertise})")
-                 weapon_choice = int(input()) - 1
-             else:
-                 weapon_choice = 0
-             
-             selected_weapon = self.character.weapon[weapon_choice]
+             selected_weapon = self.select_weapon()
              selected_weapon.expertise += 1 * hours
              print(f'{self.character.name} trained with {selected_weapon.name} for {hours} hours.\nNew weapon expertise: {selected_weapon.expertise}')
         elif choice == 2:
@@ -100,17 +116,24 @@ class Menu:
         return random.randint(1, 10)  
     
     def open_fight_menu(self, monster):
-        print('What do you want to do?')
-        choice = int(input('1) Fight\n2) Flight\n3) Tame \n'))
-
-        if choice == 1:
-            # Call attack method
-            self.attack(monster)
-        elif choice == 2:
-            # Call flight method
-            self.flight()
-        elif choice == 3:
-            self.tame()
+        while True:
+            if monster.pf>0:
+                print('What do you want to do?')
+                choice = int(input('1) Fight\n2) Flight\n3) Tame \n'))
+        
+                if choice == 1:
+                    # Call attack method
+                    self.attack(monster)
+                elif choice == 2:
+                    # Call flight method
+                    flight= self.flight()
+                    if flight == True:
+                        break
+                elif choice == 3:
+                    tame=self.tame(monster)
+                    if tame == True:
+                        break
+            else: break
             
     def open_camp_menu(self):
         print('What do you want to do?')
