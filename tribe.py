@@ -34,4 +34,27 @@ class Tribe:
     def display_characters(self):
         for character in self.characters:
             print(character.name, character.attack, character.defense)
+            
+    def consume_food(self):    
+        if 'Meat' in self.cumulative_items and self.cumulative_items['Meat'] > 0:
+            for member in self.characters:
+                if self.cumulative_items['Meat'] > 0:
+                    self.cumulative_items['Meat'] -= 1
+                    print(f"{member.name} consumed 1 unit of Food.")
+                    print(f"Remaining Food: {self.cumulative_items['Meat']}")
+                else:
+                    print(f"{member.name} has no Food to consume.")
+                    tribe.remove_member(member)
+        else:
+            print("There's no Food available in the tribe's inventory.")
+            game_over = True
+            return game_over
+    
+        self.display_cumulative_items()
+        
+    def remove_member(self, member):
+        if member in self.characters:
+            self.characters.remove(member)
+            self.update_cumulative_items()
+            print(f"{member.name} is dead!")
 

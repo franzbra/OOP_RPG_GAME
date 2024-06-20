@@ -24,6 +24,19 @@ def generate_name():
         name += " " + ending
     return name
 
+def time_flows(hour):
+    hour +=1
+    return hour
+
+def day_to_night(hour):
+    night = False
+    if hour == 3:
+        print('It\'s night')
+        night= True
+        hour = 0
+    return hour, night
+
+
 def load_data():
     with open('character_data.json', 'r') as file:
         data = json.load(file)

@@ -105,6 +105,8 @@ class Menu:
             quantity = self.find_quantity()
             self.character.equip_item(item, quantity)
             print(f"Found {quantity} units of {item}")
+            self.tribe.update_cumulative_items()
+            self.tribe.display_cumulative_items()
         else:
             print("Found nothing.")
 
@@ -137,7 +139,7 @@ class Menu:
             
     def open_camp_menu(self):
         print('What do you want to do?')
-        choice = int(input('1) Craft\n2) Rest\n3) Train \n 4)Gather resources'))
+        choice = int(input('1) Craft\n2) Rest\n3) Train \n4)Gather resources'))
         if choice == 1:
             self.craft()
         elif choice == 2:

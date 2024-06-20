@@ -15,7 +15,7 @@ from motion import *
 
 
 if __name__ == "__main__":
-    name = input("What's your name? ")
+    name = input("What's your name? \n")
     class_name = input("What is your chosen class?\n1) Warrior\n2) Hunter\n3) Shaman\n")
     
     if class_name == '1':
@@ -31,10 +31,11 @@ if __name__ == "__main__":
     print(f"Character created:\n{player}")
     #Initialize classes
     command = Commands()
-    tribe_name = input('Choose a name for your tribe')
+    tribe_name = input('Choose a name for your tribe \n')
     tribe = Tribe(tribe_name)
     tribe.add_character(player)
     menu = Menu(player, tribe)
+    time = 0
     print("Welcome to the Adventure Game!")
     print(command.current_room.get_description())
     while True:
@@ -46,7 +47,7 @@ if __name__ == "__main__":
         if verb == "go":
             if len(text) > 1:
                 command.move(text[1])
-                chance = 75 #random.randint(1, 100)
+                chance = random.randint(1, 100)
                 if chance > 70 :
                     event = command.random_event()
                     if type(event) in character_classes :  
@@ -73,6 +74,14 @@ if __name__ == "__main__":
             break
         else:
             print("I don't understand that command.")
+        time=time_flows(time)
+        time,night = day_to_night(time)
+        if night == True:
+            game= tribe.consume_food()
+            if game == True:
+                print('Your tribe is dead')
+                print('Game over :(')
+                break
     
     
     
