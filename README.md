@@ -11,6 +11,7 @@ A role playing game where you have to build and feed a prehistoric tribe during 
 - [x] add crafting skills (this is valid both for building statues, draw paintings or constructing tools)
 - [ ] implement a dynamic to craft tools based on your tribe resources
 
+
 ### Chatbot ### 
 - [ ] If new characters are evil, they will steal items from the tribe, attack or curse them(depending on their class)
 - [ ] If the communication/intelligence of the bot is lower than yours, you could try to invite him to join your tribe. 
@@ -26,9 +27,11 @@ A role playing game where you have to build and feed a prehistoric tribe during 
 
 ### Prayers ###
 - [ ] Add to possibility to pray obtaining more chance to find meat, items ecc
+
 ### Tribe ### 
 - [ ] Create a Tribe class
 - [ ] Dolls, tends, paintings and other stuff should add prestige to your tribe, making other character more eager to join you.
 - [ ] Magical objects give extra chance to find meat, items ecc when praying
 - [ ] Create an inventory for the tribe with meat, bones, wood, ...
 - [ ] Each night the tribe has to eat. Those who don't eat take 20 pf damage.
+- [ ] Implement the possibility to hunt and gather resources with all the members of the tribe. Different members should also be able to do different activities
