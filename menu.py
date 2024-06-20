@@ -44,9 +44,11 @@ class Menu:
             print(f"{monster.name} is defeated!")
             self.character.gain_experience(monster.experience)
             for item, quantity in monster.item.items():
-               if item in ["meat", "bones"]:
+               if item in ["Meat", "Bones"]:
                    self.character.equip_item(item, quantity)
-                   print(f"{self.character.name} obtains {quantity} {item} from {monster.name}.")                
+                   print(f"{self.character.name} obtains {quantity} {item} from {monster.name}.") 
+                   self.tribe.update_cumulative_items()
+                   self.tribe.display_cumulative_items()
             return True
         else:
             print(f"{monster.name} has {monster.pf} PF remaining.")

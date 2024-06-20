@@ -17,7 +17,7 @@ class Monster:
         self.tamability = tamability
         self.meat = meat
         self.bones = bones
-        self.item = {"meat": meat, "bones": bones}  # Items dictionary with initial meat and bones
+        self.item = {"Meat": meat, "Bones": bones}  # Items dictionary with initial meat and bones
 
 class Mammooth(Monster):
     def __init__(self):
