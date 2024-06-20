@@ -28,10 +28,13 @@ A role playing game where you have to build and feed a prehistoric tribe during 
 ### Prayers ###
 - [ ] Add to possibility to pray obtaining more chance to find meat, items ecc
 
+### Time ###
+- [ ] Implement a way to simulate the passing of time
 ### Tribe ### 
-- [ ] Create a Tribe class
+- [x] Create a Tribe class
 - [ ] Dolls, tends, paintings and other stuff should add prestige to your tribe, making other character more eager to join you.
 - [ ] Magical objects give extra chance to find meat, items ecc when praying
-- [ ] Create an inventory for the tribe with meat, bones, wood, ...
+- [x] Create an inventory for the tribe with meat, bones, wood, ...
+- [x] Fix monster in the tribe: their meat and bones are not available!
 - [ ] Each night the tribe has to eat. Those who don't eat take 20 pf damage.
 - [ ] Implement the possibility to hunt and gather resources with all the members of the tribe. Different members should also be able to do different activities
