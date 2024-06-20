@@ -16,7 +16,7 @@ A role playing game where you have to build and feed a prehistoric tribe during 
 
 ### Chatbot ### 
 - [ ] If new characters are evil, they will steal items from the tribe, attack or curse them(depending on their class)
-- [ ] If the communication/intelligence of the bot is lower than yours, you could try to invite him to join your tribe. 
+- [ x] If the communication/intelligence of the bot is lower than yours, you could try to invite him to join your tribe. 
 
 ### Monsters ### 
 - [x] Add dexterity
