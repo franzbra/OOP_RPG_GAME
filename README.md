@@ -7,7 +7,7 @@ A role playing game where you have to build and feed a prehistoric tribe during 
 - [x] add communication/intelligence stats to characters
 - [x] add animal affinity
 - [ ] add moral 
-- [ ] add weapon mastery value. This should increase everytime we manage to hit a monster
+- [x] add weapon mastery value. This should increase everytime we manage to hit a monster
 - [x] add crafting skills (this is valid both for building statues, draw paintings or constructing tools)
 
 ### Chatbot ### 
@@ -16,14 +16,17 @@ A role playing game where you have to build and feed a prehistoric tribe during 
 
 ### Monsters ### 
 - [x] Add dexterity
-- [ ] if a character has a value of animal affinity larger than some treshold, the monster can be tamed.
+- [x] if a character has a value of animal affinity larger than some treshold, the monster can be tamed.
 - [ ] Add two kind of monsters: regular or legendary. Chances to find a legendary monster are 10%
 
 ### Combat system ### 
-- [ ] Modify combat system. Add a chance to miss the target based on its dexterity
+- [x] Modify combat system. Add a chance to miss the target based on its dexterity
 - [ ] The monster can try to escape if its total defense is smaller than cumulative attack of the tribe
 
+### Prayers ###
+- [ ] Add to possibility to pray obtaining more chance to find meat, items ecc
 ### Tribe ### 
 - [ ] Dolls, tends, paintings and other stuff should add prestige to your tribe, making other character more eager to join you.
+- [ ] Magical objects give extra chance to find meat, items ecc when praying
 - [ ] Create an inventory for the tribe with meat, bones, wood, ...
 - [ ] Each night the tribe has to eat. Those who don't eat take 20 pf damage.
