@@ -16,11 +16,15 @@ class Character:
         self.title = []
         self.level = 1
         self.experience = 0
-        self.weapon = None
-        self.item = None
+        self.weapon = []
+        self.item = {}
         self.attack = attack
         self.defense = defense
         self.pf = pf
+        self.craft = 0
+        self.communication = 0
+        self.animal_affinity = 0
+        self.search = 0
 
     def __str__(self):
         return (f"Name: {self.name}, Level: {self.level}, Experience: {self.experience}, "
@@ -28,50 +32,58 @@ class Character:
                 f"Defense: {self.defense}, PF: {self.pf}")
 
     def equip_weapon(self, weapon):
-        self.weapon = weapon
+        self.weapon.append(weapon)
 
-    def equip_item(self, item):
-        self.item = item
+    def equip_item(self, item, quantity):
+        if item in self.item:
+            self.item[item] += quantity
+        else:
+            self.item[item] = quantity
 
     def gain_experience(self, experience):
         self.experience += experience
+        if self.experience > 10*self.level :
+            print(f"{self.name} is now stronger! New level = {self.level}")
+            self.level_up()
+            self.experience = self.experience - 10*self.level
         
     def gain_title(self, title):
         self.title.append(title)
 
-    def level_up(self, new_level, attack, defense, pf):
-        self.level += new_level
-        self.attack += attack
-        self.defense += defense
-        self.pf += pf
+    def level_up(self):
+        self.level += 1
+        self.attack += 1
+        self.defense += 1
+        self.pf += 1
 
 class Warrior(Character):
     def __init__(self, name):
         super().__init__(name, 10, 10, 20)
-        self.weapon = [Sword()]
+        self.weapon.append(Sword())
 
-    def level_up(self, new_level, attack, defense, pf):
-        super().level_up(new_level, attack, defense, pf)
+    def level_up(self):
+        super().level_up()
         self.attack += 1
 
 class Hunter(Character):
     def __init__(self, name):
         super().__init__(name, 10, 5, 25)
-        self.weapon = [Bow()]
+        self.weapon.append(Bow())
     
-    def level_up(self, new_level, attack, defense, pf):
-        super().level_up(new_level, attack, defense, pf)
+    def level_up(self):
+        super().level_up()
         self.defense += 1
 
 
 class Shaman(Character):
     def __init__(self, name):
         super().__init__(name, 5, 5, 30)
-        self.magic = [Fireball()]
-        self.weapon = [Wand()]
+        self.magic = []
+        self.magic.append(Fireball())
+        self.weapon.append(Wand())
         
-    def level_up(self, new_level, attack, defense, pf):
-        super().level_up(new_level, attack, defense, pf)
+    def level_up(self):
+        super().level_up()
         self.pf += 1
 
 
@@ -81,10 +93,10 @@ class Shaman(Character):
 class Thief(Character):
     def __init__(self, name):
         super().__init__(name, 5, 10, 25)
-        self.weapon = [Bow()]
+        self.weapon.append(Bow())
     
-    def level_up(self, new_level, attack, defense, pf):
-        super().level_up(new_level, attack, defense, pf)
+    def level_up(self):
+        super().level_up()
         self.defense += 1
         
 character_classes = [Warrior, Hunter, Shaman, Thief]

@@ -43,13 +43,18 @@ if __name__ == "__main__":
         if verb == "go":
             if len(text) > 1:
                 command.move(text[1])
-                event = command.random_event()
-                if type(event) in character_classes :  
-                    data = load_data()
-                    chatbot(event, data)
-                elif type(event) in monster_classes:
-                    while True:
-                        menu.open_menu(event)
+                chance = random.randint(1, 100)
+                if chance > 70 :
+                    event = command.random_event()
+                    if type(event) in character_classes :  
+                        data = load_data()
+                        chatbot(event, data)
+                    elif type(event) in monster_classes:
+                        while True:
+                            menu.open_fight_menu(event)
+                else :
+                    menu.open_camp_menu()
+                
             else:
                 print("Go where?")
                 
