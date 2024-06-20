@@ -23,6 +23,7 @@ A role playing game where you have to build and feed a prehistoric tribe during 
 
 ### Combat system ### 
 - [x] Modify combat system. Add a chance to miss the target based on its dexterity
+- [ ] Modify combat system. It should be turn-based. Monster can strike back!
 - [ ] The monster can try to escape if its total defense is smaller than cumulative attack of the tribe
 
 ### Prayers ###
