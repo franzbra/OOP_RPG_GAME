@@ -30,6 +30,7 @@ A role playing game where you have to build and feed a prehistoric tribe during 
 
 ### Time ###
 - [ ] Implement a way to simulate the passing of time
+- [ ] Give the player a mission to complete
 ### Tribe ### 
 - [x] Create a Tribe class
 - [ ] Dolls, tends, paintings and other stuff should add prestige to your tribe, making other character more eager to join you.
