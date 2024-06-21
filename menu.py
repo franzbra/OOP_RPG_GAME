@@ -5,7 +5,11 @@ Created on Mon Jun 17 00:06:10 2024
 @author: Francesco Brandoli
 """
 import random
+import sys
 from tribe import *
+from Prehistoric_functions import *
+from items import *
+from weapons import *
 
 class Menu:
     def __init__(self, character,tribe):
@@ -24,6 +28,8 @@ class Menu:
         selected_weapon = self.character.weapon[weapon_choice]
         return selected_weapon
 
+    def consume_stamina(self, hour):
+        self.character.pf -= 1*hour
 
     def attack(self, monster):
         # Simulate an attack action
@@ -54,6 +60,24 @@ class Menu:
             print(f"{monster.name} has {monster.pf} PF remaining.")
             return False
 
+
+    def monster_attack(self, monster):
+        # Simulate an attack action
+        print(f"{monster.name} attacks!")
+        dead = False
+        if monster.attack > self.character.dexterity:
+            damage = (monster.attack)
+            self.character.pf -= damage
+            print(f"{self.character.name} takes {damage} damage!")
+        else : print(f"{self.character.name} avoids the attack!")   
+
+        # Check if the monster is defeated
+        if self.character.pf <= 0:
+            dead = True
+            print(f"{self.character.name} was killed by a {monster.name}")
+            return dead
+
+
     def flight(self):
         # Simulate a flight action
         print(f"{self.character.name} attempts to flee.")
@@ -76,17 +100,51 @@ class Menu:
         else : 
             print(f'{self.character.name}failed to tame the beast!')
 
-    def craft(self):
-        # Simulate a crafting action
-        print(f"{self.character.name} is crafting items or weapons.")
-
-        # Logic for crafting can be added here
-        print("Crafting completed.")
+    def craft(self,item_name):
+        if item_name not in crafting_recipes:
+            print(f"Recipe for {item_name} does not exist.")
+            return
+    
+        recipe = crafting_recipes[item_name]
+        required_level = recipe["crafting_level"]
+        ingredients = recipe["ingredients"]
+    
+        if self.character.craft < required_level:
+            print(f"{self.character.name} does not have the required crafting ability to craft {item_name}. Required level: {required_level}, Current level: {self.character.craft}.")
+            return
+    
+        cumulative_items = self.tribe.cumulative_items
+        
+        # Check if all required items are available
+        for ingredient, quantity in ingredients.items():
+            if cumulative_items.get(ingredient, 0) < quantity:
+                print(f"Not enough {ingredient} to craft {item_name}.")
+                return
+    
+        # Deduct the required items from cumulative_items
+        for ingredient, quantity in ingredients.items():
+            cumulative_items[ingredient] -= quantity
+    
+        # Add the crafted item to the tribe's cumulative items
+        if item_name in cumulative_items:
+            cumulative_items[item_name] += 1
+        else:
+            cumulative_items[item_name] = 1
+        
+        if item_name in weapons_classes:
+            weapon_class = weapons_classes.get(item_name)
+            weapon_class()
+            self.character.equip_weapon(item_name)
+        print(f"{item_name} has been crafted successfully by {self.character.name}.")
+        self.tribe.display_cumulative_items()
+    
     
     def rest(self, hours):
-        # Simulate a rest action
-        print(f"{self.character.name} rested for {hours} hours and gained {self.character.level*hours} pf")
-        self.character.pf+=self.character.level*hours
+        if hours > turn : 
+            print(f'Time exceed the duration of the turn')
+        else: 
+            print(f"{self.character.name} rested for {hours} hours and gained {self.character.level*hours} pf")
+            self.character.pf+=self.character.level*hours
         
     def train(self, hours):
         #simulate weapon or crafting training
@@ -113,7 +171,6 @@ class Menu:
             print("Found nothing.")
 
     def find_resource(self):
-        resources = ["Rocks", "Wood", "Meat"]
         return random.choice(resources)
 
     def find_quantity(self):
@@ -127,7 +184,13 @@ class Menu:
         
                 if choice == 1:
                     # Call attack method
-                    self.attack(monster)
+                    monster_dead= self.attack(monster)
+                    if monster_dead == True:
+                        break
+                    character_dead = self.monster_attack(monster)
+                    if character_dead == True :
+                        print('Game over')
+                        sys.exit()                   
                 elif choice == 2:
                     # Call flight method
                     flight= self.flight()
@@ -141,28 +204,31 @@ class Menu:
             
     def open_camp_menu(self):
         print('What do you want to do?')
-        choice = int(input('1) Craft\n2) Rest\n3) Train \n4)Gather resources'))
+        choice = int(input('1) Craft\n2) Rest\n3) Train \n4)Gather resources \n5)See statistics'))
         if choice == 1:
-            self.craft()
+            item = input('What do you want to craft?')
+            self.craft(item)
         elif choice == 2:
-            hours = int(input('How many hours do you want to rest?'))
+            hours = int(input('How many hours do you want to rest?\n'))
             self.rest(hours)
         elif choice == 3:
-            hours = int(input('How many hours do you want to train?'))
+            hours = int(input('How many hours do you want to train?\n'))
             self.train(hours)
+            self.consume_stamina(hours)
         elif choice == 4:
-            hours = int(input('How many hours do you want to do that?'))
+            hours = int(input('How many hours do you want to do that?\n'))
             self.gather(hours)
+            self.consume_stamina(hours)
+        elif choice == 5:
+            choice = int(input('What do you want to see?\n1)See items you can craft \n2)See tribe items \n3)See tribe members\n'))
+            if choice ==1:
+                self.character.list_recipes()
+            elif choice ==2:
+                self.tribe.display_cumulative_items()
+            elif choice ==3:
+                self.tribe.display_characters()
+
 
 
  
         
- 
-'''    
- elif choice == 3:
-            # Call craft method
-            self.craft()
-        elif choice == 4:
-            # Call rest method
-            self.rest()
-'''

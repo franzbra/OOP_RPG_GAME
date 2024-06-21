@@ -34,4 +34,11 @@ class Dagger(Weapon):
 class Axe(Weapon):
     def __init__(self):
         super().__init__("Axe", 12, 20)
-
+        
+weapons_classes = {
+    'Sword': Sword,
+    'Wand': Wand,
+    'Bow': Bow,
+    'Dagger': Dagger,
+    'Axe': Axe
+}

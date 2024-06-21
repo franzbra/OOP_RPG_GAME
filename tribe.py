@@ -27,9 +27,11 @@ class Tribe:
                         self.cumulative_items[item] = quantity
 
     def display_cumulative_items(self):
+        print('**********************')
         print("Cumulative Items:")
         for item, quantity in self.cumulative_items.items():
             print(f"{item}: {quantity}")
+        print('**********************')
 
     def display_characters(self):
         for character in self.characters:
@@ -57,4 +59,5 @@ class Tribe:
             self.characters.remove(member)
             self.update_cumulative_items()
             print(f"{member.name} is dead!")
-
+            
+    

@@ -5,13 +5,14 @@ Created on Sun Jun 16 23:17:10 2024
 @author: Francesco Brandoli
 """
 from weapons import * 
+from items import *
 from spells import *
 from Prehistoric_functions import *
 import random
 
 
 class Character:
-    def __init__(self, name, attack, defense, pf):
+    def __init__(self, name, attack, defense, dexterity, pf):
         self.name = name
         self.title = []
         self.level = 1
@@ -20,10 +21,11 @@ class Character:
         self.item = {}
         self.attack = attack
         self.defense = defense
+        self.dexterity = dexterity
         self.pf = pf
         self.craft = 0
         self.communication = random.randint(1, 10)
-        self.animal_affinity = 1000
+        self.animal_affinity = 10
         self.search = 0
 
     def __str__(self):
@@ -55,10 +57,18 @@ class Character:
         self.attack += 1
         self.defense += 1
         self.pf += 1
+        
+    def list_recipes(self):
+        available_recipes = []
+        for item, recipe in crafting_recipes.items():
+            if self.craft >= recipe["crafting_level"]:
+                available_recipes.append(item)
+        return print(f"Available recipes for {self.name}: {available_recipes}")
+
 
 class Warrior(Character):
     def __init__(self, name):
-        super().__init__(name, 10, 10, 20)
+        super().__init__(name, 10, 10,5, 20)
         self.weapon.append(Sword())
 
     def level_up(self):
@@ -67,7 +77,7 @@ class Warrior(Character):
 
 class Hunter(Character):
     def __init__(self, name):
-        super().__init__(name, 10, 5, 25)
+        super().__init__(name, 10, 5,10, 25)
         self.weapon.append(Bow())
     
     def level_up(self):
@@ -77,7 +87,7 @@ class Hunter(Character):
 
 class Shaman(Character):
     def __init__(self, name):
-        super().__init__(name, 5, 5, 30)
+        super().__init__(name, 5, 5, 10,30)
         self.magic = []
         self.magic.append(Fireball())
         self.weapon.append(Wand())
@@ -92,7 +102,7 @@ class Shaman(Character):
     
 class Thief(Character):
     def __init__(self, name):
-        super().__init__(name, 5, 10, 25)
+        super().__init__(name, 5, 10,15, 25)
         self.weapon.append(Bow())
     
     def level_up(self):
