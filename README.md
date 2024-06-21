@@ -9,6 +9,7 @@ A role playing game where you have to build and feed a prehistoric tribe during 
 - [ ] add moral 
 - [x] add weapon mastery value. This should increase everytime we manage to hit a monster
 - [x] add crafting skills (this is valid both for building statues, draw paintings or constructing tools)
+- [ ] Test crafting procedure, the inventory of the tribe should be updated consistently
 - [x] implement a dynamic to craft tools based on your tribe resources
 - [ ] put a limit to the number of hours character can train or gather resources or number of pf you gain by sleeping
 - [x] actions consume pf
