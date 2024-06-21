@@ -37,6 +37,7 @@ A role playing game where you have to build and feed a prehistoric tribe during 
 - [ ] Give the player a mission to complete
 ### Tribe ### 
 - [x] Create a Tribe class
+- [ ] While exploring, new random tribes could appear. You might interact with their leader to exchange items or try to steal their goods. To do that, introduce a stealth stats in the characters
 - [ ] Dolls, tends, paintings and other stuff should add prestige to your tribe, making other character more eager to join you.
 - [ ] Magical objects give extra chance to find meat, items ecc when praying
 - [x] Create an inventory for the tribe with meat, bones, wood, ...
