@@ -21,7 +21,7 @@ class Menu:
             print("Choose a weapon:")
             for i, weapon in enumerate(self.character.weapon):
                 print(f"{i + 1}) {weapon.name} (Expertise: {weapon.expertise})")
-                weapon_choice = int(input()) - 1
+            weapon_choice = int(input()) - 1
         else:
             weapon_choice = 0
              
@@ -124,19 +124,28 @@ class Menu:
         # Deduct the required items from cumulative_items
         for ingredient, quantity in ingredients.items():
             cumulative_items[ingredient] -= quantity
+        
+        # If the item is a weapon, it's immediately equipped by the player.
+        if item_name in weapons_classes:
+            weapon_class = weapons_classes.get(item_name)
+            weapon = weapon_class()
+            print(weapon)
+            self.character.equip_weapon(weapon)
+            print(f"{item_name} has been crafted successfully by {self.character.name}.")
+            self.tribe.display_cumulative_items()
+            return
     
         # Add the crafted item to the tribe's cumulative items
         if item_name in cumulative_items:
             cumulative_items[item_name] += 1
         else:
             cumulative_items[item_name] = 1
-        
-        if item_name in weapons_classes:
-            weapon_class = weapons_classes.get(item_name)
-            weapon_class()
-            self.character.equip_weapon(item_name)
         print(f"{item_name} has been crafted successfully by {self.character.name}.")
         self.tribe.display_cumulative_items()
+
+    def pray(self, hours):
+        self.character.faith+=self.characterlevel*hours
+        print(f"{self.character.name} prayed for {hours} hours")
     
     
     def rest(self, hours):
@@ -204,8 +213,9 @@ class Menu:
             
     def open_camp_menu(self):
         print('What do you want to do?')
-        choice = int(input('1) Craft\n2) Rest\n3) Train \n4)Gather resources \n5)See statistics'))
+        choice = int(input('1) Craft\n2) Rest\n3) Train \n4) Gather resources \n5) Pray \n6)Statistics'))
         if choice == 1:
+            self.character.list_recipes()
             item = input('What do you want to craft?')
             self.craft(item)
         elif choice == 2:
@@ -220,6 +230,9 @@ class Menu:
             self.gather(hours)
             self.consume_stamina(hours)
         elif choice == 5:
+            hours = int(input('How many hours do you want to pray?\n'))
+            self.pray(hours)
+        elif choice == 6:
             choice = int(input('What do you want to see?\n1)See items you can craft \n2)See tribe items \n3)See tribe members\n'))
             if choice ==1:
                 self.character.list_recipes()

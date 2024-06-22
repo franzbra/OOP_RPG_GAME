@@ -38,6 +38,7 @@ if __name__ == "__main__":
     time = 0
     print("Welcome to the Adventure Game!")
     print(command.current_room.get_description())
+    
     while True:
         text = input("> ").lower().split()
         if not text:
@@ -47,7 +48,7 @@ if __name__ == "__main__":
         if verb == "go":
             if len(text) > 1:
                 command.move(text[1])
-                chance = random.randint(1, 100)
+                chance = random.randint(1, 100) + player.faith
                 if chance > 70 :
                     event = command.random_event()
                     if type(event) in character_classes :  
@@ -83,6 +84,6 @@ if __name__ == "__main__":
                 print('Game over :(')
                 break
     
-    
+ 
     
     

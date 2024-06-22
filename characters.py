@@ -27,6 +27,7 @@ class Character:
         self.communication = random.randint(1, 10)
         self.animal_affinity = 10
         self.search = 0
+        self.faith = 0
 
     def __str__(self):
         return (f"Name: {self.name}, Level: {self.level}, Experience: {self.experience}, "
