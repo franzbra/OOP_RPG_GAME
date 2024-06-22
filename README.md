@@ -9,7 +9,7 @@ A role playing game where you have to build and feed a prehistoric tribe during 
 - [ ] add moral 
 - [x] add weapon mastery value. This should increase everytime we manage to hit a monster
 - [x] add crafting skills (this is valid both for building statues, draw paintings or constructing tools)
-- [ ] Test crafting procedure, the inventory of the tribe should be updated consistently
+- [x] Test crafting procedure, the inventory of the tribe should be updated consistently
 - [x] implement a dynamic to craft tools based on your tribe resources
 - [ ] put a limit to the number of hours character can train or gather resources or number of pf you gain by sleeping
 - [x] actions consume pf
@@ -28,9 +28,10 @@ A role playing game where you have to build and feed a prehistoric tribe during 
 - [x] Modify combat system. Add a chance to miss the target based on its dexterity
 - [x] Modify combat system. It should be turn-based. Monster can strike back!
 - [ ] The monster can try to escape if its total defense is smaller than cumulative attack of the tribe
+- [ ] Add the possibility to perform critical attacks (if the attack stat is larger than some threshold, the damage is doubled)
 
 ### Prayers ###
-- [ ] Add to possibility to pray obtaining more chance to find meat, items ecc
+- [x] Add to possibility to pray obtaining more chance to find meat, items ecc
 
 ### Time ###
 - [x] Implement a way to simulate the passing of time: every 10 rounds a day goes by
