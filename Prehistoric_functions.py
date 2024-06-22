@@ -24,13 +24,15 @@ def generate_name():
         name += " " + ending
     return name
 
+turn = 10
+
 def time_flows(hour):
     hour +=1
     return hour
 
 def day_to_night(hour):
     night = False
-    if hour == 3:
+    if hour == turn:
         print('It\'s night')
         night= True
         hour = 0

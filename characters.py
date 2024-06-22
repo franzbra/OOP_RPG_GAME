@@ -116,6 +116,12 @@ def generate_random_character():
     random_character_class = random.choice(character_classes)
     random_name = generate_name()
     random_character = random_character_class(random_name)
+    dice = random.randint(0, len(resources))
+    for i in range(dice):    
+        random_item = random.choice(resources)
+        random_quantity = random.randint(0, 5)
+        random_character.equip_item(random_item,random_quantity)
+    
     print(f'There is a {random_character_class.__name__} in the forest!')
     return random_character
 

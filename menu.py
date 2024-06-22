@@ -30,6 +30,7 @@ class Menu:
 
     def consume_stamina(self, hour):
         self.character.pf -= 1*hour
+        print(f"You consumed {1*hour} pf. PF = {self.character.pf}")
 
     def attack(self, monster):
         # Simulate an attack action
@@ -63,15 +64,17 @@ class Menu:
 
     def monster_attack(self, monster):
         # Simulate an attack action
+        print(f"{self.character.pf}")
         print(f"{monster.name} attacks!")
         dead = False
         if monster.attack > self.character.dexterity:
-            damage = (monster.attack)
-            self.character.pf -= damage
-            print(f"{self.character.name} takes {damage} damage!")
-        else : print(f"{self.character.name} avoids the attack!")   
-
-        # Check if the monster is defeated
+            monster_damage = monster.attack
+            self.character.pf -= monster.attack
+            print(f"{self.character.name} takes {monster_damage} damage! PF: {self.character.pf}")
+        else : 
+            print(f"{self.character.name} avoids the attack!")   
+            return dead
+        # Check if the character is defeated
         if self.character.pf <= 0:
             dead = True
             print(f"{self.character.name} was killed by a {monster.name}")
@@ -144,8 +147,11 @@ class Menu:
         self.tribe.display_cumulative_items()
 
     def pray(self, hours):
-        self.character.faith+=self.characterlevel*hours
-        print(f"{self.character.name} prayed for {hours} hours")
+        if hours > turn : 
+            print(f'Time exceed the duration of the turn')
+        else: 
+            self.character.faith+=self.character.level*hours
+            print(f"{self.character.name} prayed for {hours} hours")
     
     
     def rest(self, hours):
@@ -154,30 +160,37 @@ class Menu:
         else: 
             print(f"{self.character.name} rested for {hours} hours and gained {self.character.level*hours} pf")
             self.character.pf+=self.character.level*hours
+            print(f"PF ={self.character.pf}")
         
     def train(self, hours):
-        #simulate weapon or crafting training
-        choice= int(input("What do you want to train?\n1)Weapon \n2)Crafting"))
-        if choice == 1:
-             selected_weapon = self.select_weapon()
-             selected_weapon.expertise += 1 * hours
-             print(f'{self.character.name} trained with {selected_weapon.name} for {hours} hours.\nNew weapon expertise: {selected_weapon.expertise}')
-        elif choice == 2:
-            self.character.craft+=(1*hours)
-            print(f'{self.character.name} trained for {hours} hours.\n New craft expertise {self.character.craft}')
+        if hours > turn : 
+            print(f'Time exceed the duration of the turn')
+        else: 
+            #simulate weapon or crafting training
+            choice= int(input("What do you want to train?\n1)Weapon \n2)Crafting"))
+            if choice == 1:
+                 selected_weapon = self.select_weapon()
+                 selected_weapon.expertise += 1 * hours
+                 print(f'{self.character.name} trained with {selected_weapon.name} for {hours} hours.\nNew weapon expertise: {selected_weapon.expertise}')
+            elif choice == 2:
+                self.character.craft+=(1*hours)
+                print(f'{self.character.name} trained for {hours} hours.\n New craft expertise {self.character.craft}')
             
     def gather(self, hours):
-        print(f"{self.character.name} looks for resources")
-        self.character.search += hours
-        if self.character.search + random.randint(0, 10) > 5:
-            item = self.find_resource()
-            quantity = self.find_quantity()
-            self.character.equip_item(item, quantity)
-            print(f"Found {quantity} units of {item}")
-            self.tribe.update_cumulative_items()
-            self.tribe.display_cumulative_items()
-        else:
-            print("Found nothing.")
+        if hours > turn : 
+            print(f'Time exceed the duration of the turn')
+        else: 
+            print(f"{self.character.name} looks for resources")
+            self.character.search += hours
+            if self.character.search + random.randint(0, 10) > 5:
+                item = self.find_resource()
+                quantity = self.find_quantity()
+                self.character.equip_item(item, quantity)
+                print(f"Found {quantity} units of {item}")
+                self.tribe.update_cumulative_items()
+                self.tribe.display_cumulative_items()
+            else:
+                print("Found nothing.")
 
     def find_resource(self):
         return random.choice(resources)
@@ -212,34 +225,37 @@ class Menu:
             else: break
             
     def open_camp_menu(self):
-        print('What do you want to do?')
-        choice = int(input('1) Craft\n2) Rest\n3) Train \n4) Gather resources \n5) Pray \n6)Statistics'))
-        if choice == 1:
-            self.character.list_recipes()
-            item = input('What do you want to craft?')
-            self.craft(item)
-        elif choice == 2:
-            hours = int(input('How many hours do you want to rest?\n'))
-            self.rest(hours)
-        elif choice == 3:
-            hours = int(input('How many hours do you want to train?\n'))
-            self.train(hours)
-            self.consume_stamina(hours)
-        elif choice == 4:
-            hours = int(input('How many hours do you want to do that?\n'))
-            self.gather(hours)
-            self.consume_stamina(hours)
-        elif choice == 5:
-            hours = int(input('How many hours do you want to pray?\n'))
-            self.pray(hours)
-        elif choice == 6:
-            choice = int(input('What do you want to see?\n1)See items you can craft \n2)See tribe items \n3)See tribe members\n'))
-            if choice ==1:
+        while True:
+            print('What do you want to do?')
+            choice = int(input('1) Craft\n2) Rest\n3) Train \n4) Gather resources \n5) Pray \n6)Statistics \n7)Nothing'))
+            if choice == 1:
                 self.character.list_recipes()
-            elif choice ==2:
-                self.tribe.display_cumulative_items()
-            elif choice ==3:
-                self.tribe.display_characters()
+                item = input('What do you want to craft?')
+                self.craft(item)
+            elif choice == 2:
+                hours = int(input('How many hours do you want to rest?\n'))
+                self.rest(hours)
+            elif choice == 3:
+                hours = int(input('How many hours do you want to train?\n'))
+                self.train(hours)
+                self.consume_stamina(hours)
+            elif choice == 4:
+                hours = int(input('How many hours do you want to do that?\n'))
+                self.gather(hours)
+                self.consume_stamina(hours)
+            elif choice == 5:
+                hours = int(input('How many hours do you want to pray?\n'))
+                self.pray(hours)
+            elif choice == 6:
+                choice = int(input('What do you want to see?\n1)See items you can craft \n2)See tribe items \n3)See tribe members\n'))
+                if choice ==1:
+                    self.character.list_recipes()
+                elif choice ==2:
+                    self.tribe.display_cumulative_items()
+                elif choice ==3:
+                    self.tribe.display_characters()
+            elif choice == 7:
+                break
 
 
 

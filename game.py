@@ -36,7 +36,9 @@ if __name__ == "__main__":
     tribe.add_character(player)
     menu = Menu(player, tribe)
     time = 0
-    print("Welcome to the Adventure Game!")
+    print("Your adventure starts here. Surrounded by the ancient trees of the snowy mountains. Last or maybe first member of your tribe. \
+          Night is coming fast. You must find enough food to survive. Bring new life to your tribe. Play the game of power.")
+    
     print(command.current_room.get_description())
     
     while True:
