@@ -12,5 +12,4 @@ crafting_recipes = {
     "Talisman": {"crafting_level": 3, "ingredients": {"Bones": 4, "Wood": 3}}
 }
 
-#resources = ["Stone", "Wood", "Meat"]
-resources = ["Wood"]
+resources = ["Stone", "Wood", "Meat"]
